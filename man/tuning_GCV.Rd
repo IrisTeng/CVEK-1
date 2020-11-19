@@ -27,7 +27,7 @@ Calculate tuning parameters based on GCV.
 \details{
 \bold{Generalized Cross Validation}
 
-\deqn{\lambda_{GCV}=\underset{\lambda \in \Lambda}{argmin}\Big\{log\;
+\deqn{\lambda_{GCV}={argmin}_{\lambda \in \Lambda}\Big\{log\;
 y^{\star
 T}(I-A_\lambda)^2y^\star-2log[1-\frac{tr(A_\lambda)}{n}-\frac{1}{n}]_+\Big\}}
 }
@@ -42,7 +42,7 @@ Edition. Springer Series in Statistics. Springer- Verlag, New York, 2
 edition, 2009.
 
 Hirotogu Akaike. Information Theory and an Extension of the Maximum
-Likelihood Princi- ple. In Selected Papers of Hirotugu Akaike, Springer
+Likelihood Principle. In Selected Papers of Hirotugu Akaike, Springer
 Series in Statistics, pages 199–213. Springer, New York, NY, 1998.
 
 Clifford M. Hurvich and Chih-Ling Tsai. Regression and time series model

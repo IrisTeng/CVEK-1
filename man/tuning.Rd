@@ -32,42 +32,42 @@ There are seven tuning parameter selections here:
 
 \bold{leave-one-out Cross Validation}
 
-\deqn{\lambda_{n-CV}=\underset{\lambda \in
-\Lambda}{argmin}\;\Big\{log\;y^{\star
+\deqn{\lambda_{n-CV}={argmin}_{\lambda \in
+\Lambda}\;\Big\{log\;y^{\star
 T}[I-diag(A_\lambda)-\frac{1}{n}I]^{-1}(I-A_\lambda)^2[I-diag(A_\lambda)-
 \frac{1}{n}I]^{-1}y^\star \Big\}}
 
 \bold{Akaike Information Criteria}
 
-\deqn{\lambda_{AIC}=\underset{\lambda \in \Lambda}{argmin}\Big\{log\;
+\deqn{\lambda_{AIC}={argmin}_{\lambda \in \Lambda}\Big\{log\;
 y^{\star T}(I-A_\lambda)^2y^\star+\frac{2[tr(A_\lambda)+2]}{n}\Big\}}
 
 \bold{Akaike Information Criteria (small-sample variant)}
 
-\deqn{\lambda_{AICc}=\underset{\lambda \in \Lambda}{argmin}\Big\{log\;
+\deqn{\lambda_{AICc}={argmin}_{\lambda \in \Lambda}\Big\{log\;
 y^{\star
 T}(I-A_\lambda)^2y^\star+\frac{2[tr(A_\lambda)+2]}{n-tr(A_\lambda)-3}\Big\}}
 
 \bold{Bayesian Information Criteria}
 
-\deqn{\lambda_{BIC}=\underset{\lambda \in \Lambda}{argmin}\Big\{log\;
+\deqn{\lambda_{BIC}={argmin}_{\lambda \in \Lambda}\Big\{log\;
 y^{\star T}(I-A_\lambda)^2y^\star+\frac{log(n)[tr(A_\lambda)+2]}{n}\Big\}}
 
 \bold{Generalized Cross Validation}
 
-\deqn{\lambda_{GCV}=\underset{\lambda \in \Lambda}{argmin}\Big\{log\;
+\deqn{\lambda_{GCV}={argmin}_{\lambda \in \Lambda}\Big\{log\;
 y^{\star
 T}(I-A_\lambda)^2y^\star-2log[1-\frac{tr(A_\lambda)}{n}-\frac{1}{n}]_+\Big\}}
 
 \bold{Generalized Cross Validation (small-sample variant)}
 
-\deqn{\lambda_{GCVc}=\underset{\lambda \in \Lambda}{argmin}\Big\{log\;
+\deqn{\lambda_{GCVc}={argmin}_{\lambda \in \Lambda}\Big\{log\;
 y^{\star
 T}(I-A_\lambda)^2y^\star-2log[1-\frac{tr(A_\lambda)}{n}-\frac{2}{n}]_+\Big\}}
 
 \bold{Generalized Maximum Profile Marginal Likelihood}
 
-\deqn{\lambda_{GMPML}=\underset{\lambda \in \Lambda}{argmin}\Big\{log\;
+\deqn{\lambda_{GMPML}={argmin}_{\lambda \in \Lambda}\Big\{log\;
 y^{\star T}(I-A_\lambda)y^\star-\frac{1}{n-1}log \mid I-A_\lambda \mid
 \Big\}}
 }
@@ -82,7 +82,7 @@ Edition. Springer Series in Statistics. Springer- Verlag, New York, 2
 edition, 2009.
 
 Hirotogu Akaike. Information Theory and an Extension of the Maximum
-Likelihood Princi- ple. In Selected Papers of Hirotugu Akaike, Springer
+Likelihood Principle. In Selected Papers of Hirotugu Akaike, Springer
 Series in Statistics, pages 199–213. Springer, New York, NY, 1998.
 
 Clifford M. Hurvich and Chih-Ling Tsai. Regression and time series model

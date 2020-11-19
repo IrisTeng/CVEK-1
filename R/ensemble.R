@@ -9,7 +9,7 @@
 #' 
 #' After obtaining the estimated errors \eqn{\{\hat{\epsilon}_d\}_{d=1}^D}, we
 #' estimate the ensemble weights \eqn{u=\{u_d\}_{d=1}^D} such that it minimizes
-#' the overall error \deqn{\hat{u}=\underset{u \in \Delta}{argmin}\parallel
+#' the overall error \deqn{\hat{u}={argmin}_{u \in \Delta}\parallel
 #' \sum_{d=1}^Du_d\hat{\epsilon}_d\parallel^2 \quad where\; \Delta=\{u | u \geq
 #' 0, \parallel u \parallel_1=1\}} Then produce the final ensemble prediction:
 #' \deqn{\hat{h}=\sum_{d=1}^D \hat{u}_d h_d=\sum_{d=1}^D \hat{u}_d
@@ -79,7 +79,7 @@ ensemble <-
 #' 
 #' After obtaining the estimated errors \eqn{\{\hat{\epsilon}_d\}_{d=1}^D}, we
 #' estimate the ensemble weights \eqn{u=\{u_d\}_{d=1}^D} such that it minimizes
-#' the overall error \deqn{\hat{u}=\underset{u \in \Delta}{argmin}\parallel
+#' the overall error \deqn{\hat{u}={argmin}_{u \in \Delta}\parallel
 #' \sum_{d=1}^Du_d\hat{\epsilon}_d\parallel^2 \quad where\; \Delta=\{u | u \geq
 #' 0, \parallel u \parallel_1=1\}} Then produce the final ensemble prediction:
 #' \deqn{\hat{h}=\sum_{d=1}^D \hat{u}_d h_d=\sum_{d=1}^D \hat{u}_d

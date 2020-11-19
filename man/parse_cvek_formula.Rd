@@ -43,29 +43,6 @@ use k() to specify kernel terms.
 Additionally, user can specify interaction between kernel terms (using either '*' and ':'),
 and exclude interaction term by including -1 on the RHS of formula.
 }
-\examples{
-
-# create data
-data <- as.data.frame(matrix(rnorm(700), ncol = 7,
-dimnames = list(NULL, paste0("x", 1:7))))
-data_new <- as.data.frame(matrix(rexp(700), ncol = 7,
-dimnames = list(NULL, paste0("x", 1:7))))
-data$y <- as.matrix(data) \%*\% rnorm(7)
-formula <- y ~ x1 + x2 + k(x3, x4) + k(x5, x6) + k(x7) + k(x3, x4) * k(x5, x6) * x7
-kern_par <- data.frame(method = c("rbf", "polynomial", "matern"),
-l = c(.5, 1, 1.5), p = 1:3, sigma = rep(1, 3), stringsAsFactors = FALSE)
-
-# define kernel library
-kern_func_list <- define_library(kern_par)
-
-# produce training data 
-parse_cvek_formula(formula, kern_func_list = kern_func_list, 
-data = data, data_new = NULL)
-
-# produce prediction data from data_new
-parse_cvek_formula(formula, kern_func_list = kern_func_list, 
-data = data, data_new = data_new)
-}
 \author{
 Jeremiah Zhe Liu
 }

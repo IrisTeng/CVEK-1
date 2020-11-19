@@ -27,7 +27,7 @@ Calculate tuning parameters based on BIC.
 \details{
 \bold{Bayesian Information Criteria}
 
-\deqn{\lambda_{BIC}=\underset{\lambda \in \Lambda}{argmin}\Big\{log\;
+\deqn{\lambda_{BIC}={argmin}_{\lambda \in \Lambda}\Big\{log\;
 y^{\star T}(I-A_\lambda)^2y^\star+\frac{log(n)[tr(A_\lambda)+2]}{n}\Big\}}
 }
 \references{
@@ -41,7 +41,7 @@ Edition. Springer Series in Statistics. Springer- Verlag, New York, 2
 edition, 2009.
 
 Hirotogu Akaike. Information Theory and an Extension of the Maximum
-Likelihood Princi- ple. In Selected Papers of Hirotugu Akaike, Springer
+Likelihood Principle. In Selected Papers of Hirotugu Akaike, Springer
 Series in Statistics, pages 199–213. Springer, New York, NY, 1998.
 
 Clifford M. Hurvich and Chih-Ling Tsai. Regression and time series model

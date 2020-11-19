@@ -59,43 +59,49 @@
 #' the presence of possible gene-gene interactions using garrote kernel
 #' machines. December 2011.
 #'
-#' Petra Bu ̊zˇkova ́, Thomas Lumley, and Kenneth Rice. Permutation and
+#' Petra Bu z kova, Thomas Lumley, and Kenneth Rice. Permutation and
 #' parametric bootstrap tests for gene-gene and gene-environment interactions.
 #' January 2011.
 #' 
 #' @examples
-#' # create data
-#' kern_par <- data.frame(method = c("linear", "polynomial", "rbf"), 
-#' l = c(.5, 1, 1.5), p = 1:3, stringsAsFactors = FALSE)
+#'
+#' kern_par <- data.frame(method = rep("rbf", 3),
+#' l = rep(3, 3), p = rep(2, 3), 
+#' stringsAsFactors = FALSE)
 #' # define kernel library
 #' kern_func_list <- define_library(kern_par)
-#' n <- 50
-#' d <- 6
-#' formula <- y ~ x1 + x2 + k(x3, x4) + k(x5, x6)
+#' 
+#' n <- 10
+#' d <- 4
+#' formula <- y ~ x1 + x2 + k(x3, x4)
+#' formula_test <- y ~ k(x1, x2) * k(x3, x4)
 #' data <- as.data.frame(matrix(
 #'   rnorm(n * d),
 #'   ncol = d,
 #'   dimnames = list(NULL, paste0("x", 1:d))
 #' ))
-#' lnr_kern_func <- generate_kernel(method = "linear")
-#' rbf_kern_func <- generate_kernel(method = "rbf", l = 1.25)
-#' kern_effect_lnr <- 
-#'   parse_kernel_variable("k(x3, x4)", lnr_kern_func, data)
-#' kern_effect_rbf <- 
-#'   parse_kernel_variable("k(x5, x6)", rbf_kern_func, data)
 #' beta_true <- c(1, .41, 2.37)
+#' lnr_kern_func <- generate_kernel(method = "rbf", l = 3)
+#' kern_effect_lnr <-
+#'   parse_kernel_variable("k(x3, x4)", lnr_kern_func, data)
 #' alpha_lnr_true <- rnorm(n)
-#' alpha_rbf_true <- rnorm(n)
 #' 
-#' kern_term_lnr <- kern_effect_lnr %*% alpha_lnr_true
-#' kern_term_rbf <- kern_effect_rbf %*% alpha_rbf_true
+#' data$y <- as.matrix(cbind(1, data[, c("x1", "x2")])) %*% beta_true +
+#'   kern_effect_lnr %*% alpha_lnr_true
 #' 
-#' data$y <- as.matrix(cbind(1, data[, c("x1", "x2")])) %*% beta_true + 
-#'   kern_term_lnr + kern_term_rbf
+#' data_train <- data
 #' 
-#' formula_test <- y ~ k(x1):k(x4, x6)
-#' pvalue <- cvek(formula, kern_func_list = kern_func_list, 
-#'                data = data, formula_test = formula_test)$pvalue
+#' pvalue <- cvek(formula,
+#'                kern_func_list,
+#'                data_train,
+#'                formula_test,
+#'                mode = "loocv",
+#'                strategy = "stack",
+#'                beta_exp = 1,
+#'                lambda = exp(seq(-2, 2)),
+#'                test = "asymp",
+#'                alt_kernel_type = "linear",
+#'                verbose = FALSE)$pvalue
 #' 
 #' @export cvek
 cvek <- function(formula,
@@ -309,28 +315,6 @@ cvek_test <- function(est_res,
 #' and exclude interaction term by including -1 on the RHS of formula.
 #'
 #' @author Jeremiah Zhe Liu
-#' @examples
-#'
-#' # create data
-#' data <- as.data.frame(matrix(rnorm(700), ncol = 7,
-#' dimnames = list(NULL, paste0("x", 1:7))))
-#' data_new <- as.data.frame(matrix(rexp(700), ncol = 7,
-#' dimnames = list(NULL, paste0("x", 1:7))))
-#' data$y <- as.matrix(data) %*% rnorm(7)
-#' formula <- y ~ x1 + x2 + k(x3, x4) + k(x5, x6) + k(x7) + k(x3, x4) * k(x5, x6) * x7
-#' kern_par <- data.frame(method = c("rbf", "polynomial", "matern"),
-#' l = c(.5, 1, 1.5), p = 1:3, sigma = rep(1, 3), stringsAsFactors = FALSE)
-#'
-#' # define kernel library
-#' kern_func_list <- define_library(kern_par)
-#'
-#' # produce training data 
-#' parse_cvek_formula(formula, kern_func_list = kern_func_list, 
-#' data = data, data_new = NULL)
-#' 
-#' # produce prediction data from data_new
-#' parse_cvek_formula(formula, kern_func_list = kern_func_list, 
-#' data = data, data_new = data_new)
 #' @export parse_cvek_formula
 parse_cvek_formula <-
   function(formula, kern_func_list, data, 

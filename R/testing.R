@@ -34,7 +34,7 @@
 #' the presence of possible gene-gene interactions using garrote kernel
 #' machines. December 2011.
 #' 
-#' Petra Bu ̊zˇkova ́, Thomas Lumley, and Kenneth Rice. Permutation and
+#' Petra Bu z kova, Thomas Lumley, and Kenneth Rice. Permutation and
 #' parametric bootstrap tests for gene-gene and gene-environment interactions.
 #' January 2011.
 test_asymp <- function(Y, X, y_fixed, alpha0, K_ens, 
@@ -106,7 +106,7 @@ test_asymp <- function(Y, X, y_fixed, alpha0, K_ens,
 #' the presence of possible gene-gene interactions using garrote kernel
 #' machines. December 2011.
 #' 
-#' Petra Bu ̊zˇkova ́, Thomas Lumley, and Kenneth Rice. Permutation and
+#' Petra Bu z kova, Thomas Lumley, and Kenneth Rice. Permutation and
 #' parametric bootstrap tests for gene-gene and gene-environment interactions.
 #' January 2011.
 test_boot <- function(Y, X, y_fixed, alpha0, K_ens, 

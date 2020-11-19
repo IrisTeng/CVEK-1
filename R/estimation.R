@@ -221,35 +221,6 @@ estimate_base <- function(Y, X, K_list, mode, lambda, ...) {
 #' @author Wenying Deng
 #' @references Andreas Buja, Trevor Hastie, and Robert Tibshirani. (1989) 
 #' Linear Smoothers and Additive Models. Ann. Statist. Volume 17, Number 2, 453-510.
-#' @examples
-#' kern_par <- data.frame(method = c("linear", "polynomial", "matern"), 
-#'                        l = c(.5, 1, 1.5), p = 1:3, stringsAsFactors = FALSE)
-#' # define kernel library
-#' kern_func_list <- define_library(kern_par)
-#' n <- 50
-#' d <- 4
-#' formula <- y ~ x1 + x2 + k(x3, x4)
-#' data <- as.data.frame(matrix(
-#'   rnorm(n * d),
-#'   ncol = d,
-#'   dimnames = list(NULL, paste0("x", 1:d))
-#' ))
-#' lnr_kern_func <- generate_kernel(method = "linear")
-#' kern_effect_mat <- 
-#'   parse_kernel_variable("k(x3, x4)", lnr_kern_func, data)
-#' beta_true <- c(1, .41, 2.37)
-#' alpha_true <- rnorm(n)
-#' 
-#' K <- kern_effect_mat
-#' data$y <- as.matrix(cbind(1, data[, c("x1", "x2")])) %*% beta_true + 
-#'   K %*% alpha_true
-#' 
-#' model_matrices <- parse_cvek_formula(formula, 
-#'                                      kern_func_list = kern_func_list, 
-#'                                      data = data, verbose = FALSE)
-#' estimate_ridge(Y = model_matrices$y, X = model_matrices$X, 
-#' K = model_matrices$K[[1]], lambda = exp(-5))
-#' 
 #' @export estimate_ridge
 estimate_ridge <- function(Y, X, K, lambda, 
                            compute_kernel_terms=TRUE, 

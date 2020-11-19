@@ -49,7 +49,7 @@ Arnab Maity and Xihong Lin. Powerful tests for detecting a gene effect in
 the presence of possible gene-gene interactions using garrote kernel
 machines. December 2011.
 
-Petra Bu ̊zˇkova ́, Thomas Lumley, and Kenneth Rice. Permutation and
+Petra Bu z kova, Thomas Lumley, and Kenneth Rice. Permutation and
 parametric bootstrap tests for gene-gene and gene-environment interactions.
 January 2011.
 }

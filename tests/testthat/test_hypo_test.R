@@ -5,9 +5,10 @@ test_that("range of output", {
                          l = c(.5, 1, 1.5), p = 1:3, stringsAsFactors = FALSE)
   # define kernel library
   kern_func_list <- define_library(kern_par)
-  n <- 50
+  n <- 20
   d <- 6
   formula <- y ~ x1 + x2 + k(x3, x4) + k(x5, x6)
+  set.seed(1118)
   data <- as.data.frame(matrix(
     rnorm(n * d),
     ncol = d,
@@ -32,7 +33,7 @@ test_that("range of output", {
   formula_test <- y ~ k(x1):k(x4, x6)
   pvalue <- cvek(formula, kern_func_list = kern_func_list, 
                  data = data, formula_test = formula_test, 
-                 alt_kernel_type = "ensemble", B = 200)$pvalue
+                 test = "asymp", alt_kernel_type = "linear")$pvalue
 
   expect_lte(pvalue, 1)
   expect_gte(pvalue, 0)
@@ -43,9 +44,10 @@ test_that("warning message from tuning", {
                          l = c(.5, 1, 1.5), p = 1:3, stringsAsFactors = FALSE)
   # define kernel library
   kern_func_list <- define_library(kern_par)
-  n <- 50
+  n <- 20
   d <- 6
   formula <- y ~ x1 + x2 + k(x3, x4) + k(x5, x6)
+  set.seed(1118)
   data <- as.data.frame(matrix(
     rnorm(n * d),
     ncol = d,

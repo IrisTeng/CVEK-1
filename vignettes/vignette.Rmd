@@ -23,7 +23,6 @@ Using a library of base kernels, **CVEK** learns the  generating function from d
 Download the package from CRAN or [GitHub](https://github.com/IrisTeng/CVEK-1) and then install and load it.
 
 ```{r, message = FALSE}
-# devtools::install_github("IrisTeng/CVEK-1")
 library(CVEK)
 library(ggplot2)
 library(ggrepel)
@@ -34,22 +33,22 @@ library(ggrepel)
 
 ### Generate Data and Define Model
 
-We generate a simulated dataset using the $"rbf"$ kernel with length-scale $1$, and set the relative interaction strength to be $0.2$. The outcome $y_i$ is generated as,
+We generate a simulated dataset using the $"linear"$ kernel, and set the relative interaction strength to be $0.2$. The outcome $y_i$ is generated as,
 \begin{align*}
 y_i=h_1(\mathbf{x}_{i, 1})+h_2(\mathbf{x}_{i, 2})+0.2 * h_{12}(\mathbf{x}_{i, 1}, \mathbf{x}_{i, 2})+\epsilon_i,
 \end{align*}
-where $h_1$, $h_2$, $h_{12}$ are sampled from RKHSs $\textit{H}_1$, $\textit{H}_2$, $\textit{H}_{12}$, generated using the corresponding *rbf* kernel. We standardize all sampled functions to have unit form, so that $0.2$ represents the strength of interaction relative to the main effect.
+where $h_1$, $h_2$, $h_{12}$ are sampled from RKHSs $\textit{H}_1$, $\textit{H}_2$, $\textit{H}_{12}$, generated using the corresponding *linear* kernel. We standardize all sampled functions to have unit form, so that $0.2$ represents the strength of interaction relative to the main effect.
 
 ```{r}
 set.seed(0726)
-n <- 150 # including training and test
+n <- 60 # including training and test
 d <- 4
 int_effect <- 0.2
 data <- matrix(rnorm(n * d), ncol = d)
 Z1 <- data[, 1:2]
 Z2 <- data[, 3:4]
 
-kern <- generate_kernel(method = "rbf", l = 1)
+kern <- generate_kernel(method = "linear")
 w <- rnorm(n)
 w12 <- rnorm(n)
 K1 <- kern(Z1, Z1)
@@ -74,8 +73,8 @@ Y <- h0 + int_effect * h1 + rnorm(1) + rnorm(n, 0, 0.01)
 data <- as.data.frame(cbind(Y, Z1, Z2))
 colnames(data) <- c("y", paste0("z", 1:d))
 
-data_train <- data[1:100, ]
-data_test <- data[101:150, ]
+data_train <- data[1:40, ]
+data_test <- data[41:60, ]
 ```
 
 
@@ -120,8 +119,7 @@ est_res$lambda
 est_res$u_hat
 ```
 
-We can see that the ensemble weight assigns $1$ to the $"rbf"$ kernel, which is the true kernel. 
-This illustrates the accuracy and efficiency of the CVEK method.
+We can see that the ensemble weight assigns $0.99$ to the $"linear"$ kernel, which is the true kernel. This illustrates the accuracy and efficiency of the CVEK method.
 
 We next specify the testing procedure. Note that we can use the same function *cvek* to perform hypothesis testing, as we did for estimation, but we need to provide $formula\_test$, which is the user-supplied formula indicating the additional alternative effect (e.g., interactions) to test for. Specifically, we will first show how to conduct the classic score test by specifying $test="asymp"$, followed by a bootstrap test where we specify $test="boot"$, and the number of bootstrap samples $B=200$.
 

@@ -23,3 +23,4 @@ compute_expected_matrix <- function(term_names, kern_func,
   
   kern_func(data_mat_new, data_mat)
 }
+

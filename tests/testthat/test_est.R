@@ -10,6 +10,7 @@ test_that(desc = "single kernel term case",
             n <- 50
             d <- 4
             formula <- y ~ x1 + x2 + k(x3, x4)
+            set.seed(1118)
             data <- as.data.frame(matrix(
               rnorm(n * d),
               ncol = d,
@@ -62,9 +63,10 @@ test_that(desc = "two kernel terms case",
                                    l = c(.5, 1, 1.5), p = 1:3, stringsAsFactors = FALSE)
             # define kernel library
             kern_func_list <- define_library(kern_par)
-            n <- 50
+            n <- 20
             d <- 6
             formula <- y ~ x1 + x2 + k(x3, x4) + k(x5, x6)
+            set.seed(1118)
             data <- as.data.frame(matrix(
               rnorm(n * d),
               ncol = d,
@@ -75,7 +77,6 @@ test_that(desc = "two kernel terms case",
               parse_kernel_variable("k(x3, x4)", lnr_kern_func, data)
             kern_effect_lnr2 <- 
               parse_kernel_variable("k(x5, x6)", lnr_kern_func, data)
-            set.seed(1231)
             beta_true <- c(1, .41, 2.37)
             alpha_lnr1_true <- rnorm(n)
             alpha_lnr2_true <- rnorm(n)
@@ -121,9 +122,10 @@ test_that(desc = "individual term estimate consistent with projection matrix",
                                    l = c(.5, 1, 1.5), p = 1:3, stringsAsFactors = FALSE)
             # define kernel library
             kern_func_list <- define_library(kern_par)
-            n <- 50
+            n <- 20
             d <- 6
             formula <- y ~ x1 + x2 + k(x3, x4) + k(x5, x6)
+            set.seed(1118)
             data <- as.data.frame(matrix(
               rnorm(n * d),
               ncol = d,
@@ -134,7 +136,6 @@ test_that(desc = "individual term estimate consistent with projection matrix",
               parse_kernel_variable("k(x3, x4)", lnr_kern_func, data)
             kern_effect_lnr2 <- 
               parse_kernel_variable("k(x5, x6)", lnr_kern_func, data)
-            set.seed(1231)
             beta_true <- c(1, .41, 2.37)
             alpha_lnr1_true <- rnorm(n)
             alpha_lnr2_true <- rnorm(n)
@@ -178,11 +179,12 @@ test_that("implementation of pure fixed effects", {
   model_matrices <- parse_cvek_formula(formula, 
                                        kern_func_list = NULL, 
                                        data = longley, verbose = FALSE)
-  result <- estimation(Y = model_matrices$y, 
-                       X = model_matrices$X, 
-                       K_list = model_matrices$K, 
-                       mode = "GCV", strategy = "stack", 
-                       beta_exp = 1, lambda = exp(seq(-10, 5)))
+  expect_warning(result <- estimation(Y = model_matrices$y, 
+                                      X = model_matrices$X, 
+                                      K_list = model_matrices$K, 
+                                      mode = "GCV", strategy = "stack", 
+                                      beta_exp = 1, lambda = exp(seq(-10, 5))), 
+                 "the smallest one")
   
   X <- model_matrices$X
   y_est <- X %*% result$beta

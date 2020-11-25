@@ -5,21 +5,20 @@ knitr::opts_chunk$set(
 )
 
 ## ---- message = FALSE---------------------------------------------------------
-# devtools::install_github("IrisTeng/CVEK-1")
 library(CVEK)
 library(ggplot2)
 library(ggrepel)
 
 ## -----------------------------------------------------------------------------
 set.seed(0726)
-n <- 150 # including training and test
+n <- 60 # including training and test
 d <- 4
 int_effect <- 0.2
 data <- matrix(rnorm(n * d), ncol = d)
 Z1 <- data[, 1:2]
 Z2 <- data[, 3:4]
 
-kern <- generate_kernel(method = "rbf", l = 1)
+kern <- generate_kernel(method = "linear")
 w <- rnorm(n)
 w12 <- rnorm(n)
 K1 <- kern(Z1, Z1)
@@ -44,8 +43,8 @@ Y <- h0 + int_effect * h1 + rnorm(1) + rnorm(n, 0, 0.01)
 data <- as.data.frame(cbind(Y, Z1, Z2))
 colnames(data) <- c("y", paste0("z", 1:d))
 
-data_train <- data[1:100, ]
-data_test <- data[101:150, ]
+data_train <- data[1:40, ]
+data_test <- data[41:60, ]
 
 ## ---- results='asis'----------------------------------------------------------
 knitr::kable(head(data_train, 5))

@@ -3,6 +3,7 @@ n <- 50
 d <- 4
 formula <- y ~ x1 + x2 + k(x3, x4)
 formula_test <- y ~ k(x1, x2) * k(x3, x4)
+set.seed(1118)
 data <- as.data.frame(matrix(
   rnorm(n * d),
   ncol = d,
@@ -94,7 +95,7 @@ test_that("multiple true kernels, train and test sets",
             # define kernel library
             kern_func_list <- define_library(kern_par)
 
-            n <- 100
+            n <- 80
             data <- as.data.frame(matrix(
               rnorm(n * d),
               ncol = d,
@@ -109,8 +110,8 @@ test_that("multiple true kernels, train and test sets",
             data$y <- as.matrix(cbind(1, data[, c("x1", "x2")])) %*% beta_true +
               kern_effect_lnr %*% alpha_lnr_true
 
-            data_train <- data[1:50, ]
-            data_test <- data[51:100, ]
+            data_train <- data[1:60, ]
+            data_test <- data[61:80, ]
 
             result <- cvek(formula,
                            kern_func_list,

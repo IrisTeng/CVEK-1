@@ -1,7 +1,7 @@
 Package: CVEK
 Title: Cross-Validated Kernel Ensemble
-Version: 0.1-0
-Date: 2020-11-16
+Version: 0.1-1
+Date: 2020-11-24
 Authors@R: c(person("Wenying", "Deng", role = c("aut", "cre"),
                      email = "wdeng@g.harvard.edu"),
               person("Jeremiah Zhe", "Liu", role = c("ctb")))
@@ -24,7 +24,7 @@ RoxygenNote: 7.1.1
 Suggests: testthat, knitr, rmarkdown, ggplot2, ggrepel
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2020-11-16 03:17:59 UTC; irisdeng
+Packaged: 2020-11-25 17:09:17 UTC; irisdeng
 Author: Wenying Deng [aut, cre],
   Jeremiah Zhe Liu [ctb]
 Maintainer: Wenying Deng <wdeng@g.harvard.edu>

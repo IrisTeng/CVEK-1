@@ -1,8 +1,9 @@
 context("Model estimation interface")
 
 # set up data
-n <- 100
+n <- 60
 d <- 7
+set.seed(1118)
 data <- as.data.frame(matrix(
   rnorm(n * d),
   ncol = d,
@@ -171,4 +172,5 @@ test_that(desc = "parse_cvek_formula with no intercept term",
                           model.matrix(formula_new, data = data_new))
              expect_equal(model_mat_list$y, NULL)
            })
+ 
  

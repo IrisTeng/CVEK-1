@@ -75,6 +75,7 @@
 #' d <- 4
 #' formula <- y ~ x1 + x2 + k(x3, x4)
 #' formula_test <- y ~ k(x1, x2) * k(x3, x4)
+#' set.seed(1118)
 #' data <- as.data.frame(matrix(
 #'   rnorm(n * d),
 #'   ncol = d,

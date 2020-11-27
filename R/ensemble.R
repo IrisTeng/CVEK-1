@@ -238,6 +238,7 @@ ensemble_exp <-
     } else if (beta_exp == "max") {
       beta <- max(apply(A, 2, function(x) sum(x ^ 2))) * 2
     }
+    beta <- as.numeric(beta)
     u_hat <- apply(A, 2, function(x) {
       exp(sum(-x ^ 2 / beta))
     })

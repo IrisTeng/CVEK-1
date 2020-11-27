@@ -429,12 +429,10 @@ tuning_gmpml <-
     n <- length(Y)
     CV <- sapply(lambda, function(k){
       
-      A_kernel_only <- K_mat %*% ginv(K_mat + k * diag(n))
-      log_det <- unlist(determinant(diag(n) - A_kernel_only), 
-                        use.names = FALSE)[1]
       proj_matrix <- 
         estimate_ridge(Y = Y, X = X, K = K_mat, lambda = k)$proj_matrix      
       A <- proj_matrix$total
+      log_det <- unlist(determinant(diag(n) - A), use.names = FALSE)[1]
       log(t(Y) %*% (diag(n) - A) %*% Y) - 1 / (n - 1) * log_det
     })
     

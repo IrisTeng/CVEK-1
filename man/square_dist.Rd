@@ -15,8 +15,7 @@ square_dist(X1, X2 = NULL, l = 1)
 (flexibility) of a specific kernel.}
 }
 \value{
-\item{kern}{(function) A function calculating the relevance of two
-matrices.}
+\item{dist_sq}{(matrix, n1*n2) The computed squared Euclidean distance.}
 }
 \description{
 Compute Squared Euclidean distance between two sets of variables with the

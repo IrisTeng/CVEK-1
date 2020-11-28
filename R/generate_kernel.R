@@ -285,8 +285,7 @@ kernel_nn <-
 #' @param X2 (matrix, n2*p0) The second set of variables.
 #' @param l (numeric) A numeric number indicating the hyperparameter
 #' (flexibility) of a specific kernel.
-#' @return \item{kern}{(function) A function calculating the relevance of two
-#' matrices.}
+#' @return \item{dist_sq}{(matrix, n1*n2) The computed squared Euclidean distance.}
 #' @author Wenying Deng
 #' @references The MIT Press. Gaussian Processes for Machine Learning, 2006.
 #' @keywords internal
@@ -307,6 +306,8 @@ square_dist <- function(X1, X2 = NULL, l = 1) {
   dist <- -2 * X1 %*% t(X2)
   X1m <- matrix(X1s, nrow = length(X1s), ncol = nrow(X2), byrow = FALSE)
   X2m <- matrix(X2s, nrow = nrow(X1), ncol = length(X2s), byrow = TRUE)
-  dist + X1m + X2m
+  dist_sq <- dist + X1m + X2m
+  dist_sq[which(abs(dist_sq) < 1e-12)] <- 0
+  dist_sq
 }
 

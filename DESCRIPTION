@@ -24,7 +24,7 @@ RoxygenNote: 7.1.1
 Suggests: testthat, knitr, rmarkdown, ggplot2, ggrepel
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2020-11-28 02:30:03 UTC; irisdeng
+Packaged: 2020-11-28 04:23:15 UTC; irisdeng
 Author: Wenying Deng [aut, cre],
   Jeremiah Zhe Liu [ctb]
 Maintainer: Wenying Deng <wdeng@g.harvard.edu>

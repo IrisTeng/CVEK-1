@@ -232,13 +232,13 @@ ensemble_exp <-
     kern_size <- ncol(error_mat)
     A <- error_mat
     if (beta_exp == "med") {
-      beta <- median(apply(A, 2, function(x) sum(x ^ 2)))
+      beta_exp <- median(apply(A, 2, function(x) sum(x ^ 2)))
     } else if (beta_exp == "min") {
-      beta <- min(apply(A, 2, function(x) sum(x ^ 2))) / 10
+      beta_exp <- min(apply(A, 2, function(x) sum(x ^ 2))) / 10
     } else if (beta_exp == "max") {
-      beta <- max(apply(A, 2, function(x) sum(x ^ 2))) * 2
+      beta_exp <- max(apply(A, 2, function(x) sum(x ^ 2))) * 2
     }
-    beta <- as.numeric(beta)
+    beta <- as.numeric(beta_exp)
     u_hat <- apply(A, 2, function(x) {
       exp(sum(-x ^ 2 / beta))
     })
